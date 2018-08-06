@@ -1,0 +1,7 @@
+{
+  "name": "awesome_places",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "ionic-angular"
+}

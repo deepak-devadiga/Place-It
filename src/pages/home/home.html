@@ -1,0 +1,48 @@
+<ion-header>
+  <ion-navbar>
+    <ion-buttons end>
+      <!--<button ion-button icon-only [navPush]="addPlacePage">
+        <ion-icon name='add'></ion-icon>
+      </button>-->
+    </ion-buttons>
+    <ion-title text-center>
+      <ion-icon name="pin" color="primary"></ion-icon>
+      Awesome Places
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content  padding>
+
+  <ion-card *ngFor="let place of places; let i of index" (click)="onOpenPlace(place, i)">
+      <ion-grid>
+    <ion-row>
+      
+      <ion-col>
+        <img [src]="place.imageUrl" alt="">
+    </ion-col>
+    </ion-row>
+        <ion-row>
+        <ion-col>
+            <ion-card-content text-center>
+                <ion-list>
+                    <h1>
+                        {{ place.title }}
+                    </h1>
+                    <ion-item><small><i>{{place.dateTime}}</i></small></ion-item>
+                    <ion-item>{{ place.description }}</ion-item>
+                  </ion-list>
+              </ion-card-content>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-card>
+
+
+
+  <ion-fab bottom right>
+      <button ion-fab mini [navPush]="addPlacePage"><ion-icon name="add"></ion-icon></button>
+  </ion-fab>
+
+
+</ion-content>

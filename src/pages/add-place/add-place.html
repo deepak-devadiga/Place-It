@@ -1,0 +1,99 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title text-center>
+        <ion-icon name="compass" color="primary"></ion-icon>
+      Add a Place
+    </ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <form #f="ngForm" (ngSubmit)="onSubmit(f)">
+    <ion-list>
+      <ion-item>
+        <ion-label stacked>Title</ion-label>
+        <ion-input type="text" placeholder="Beach..." name="title" ngModel required></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label stacked>Short Description</ion-label>
+        <ion-textarea placeholder="Add a short description" name="description" ngModel required></ion-textarea>
+      </ion-item>
+    </ion-list>
+    <ion-grid>
+        <ion-row>
+            <ion-col text-center>
+              <h5>Where to Find?</h5>
+              <cite>"Choose the location either manually or auto-detect!"</cite>
+            </ion-col>
+          </ion-row>
+      <ion-row>
+        <ion-col>
+          <button ion-button block type="button" icon-left (click)="onLocate()">
+            <ion-icon name="locate"></ion-icon>
+            Locate Me
+          </button>
+        </ion-col>
+        <ion-col>
+            <button ion-button block color="bright" type="button" icon-left (click)="onOpenMap()">
+              <ion-icon name="map"></ion-icon>
+              Locate on Map
+            </button>
+          </ion-col>
+      </ion-row>
+    </ion-grid>
+
+      <ion-card *ngIf="locationIsSet">
+          <ion-card-content>
+              <ion-row >
+                  <ion-col>
+                    <agm-map [latitude]="location.lat" [longitude]="location.lng" [zoom]="15">
+                      <agm-marker [latitude]="location.lat" [longitude]="location.lng"></agm-marker>
+                    </agm-map>
+                  </ion-col>
+                </ion-row>
+          </ion-card-content>
+        </ion-card>
+        <hr>
+    <ion-grid>
+      <ion-row>
+        <ion-col text-center>
+          <h5>Take a Photo!</h5>
+          <cite>"Take one best pic of this awesome place!"</cite>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <button ion-button icon-left block outline type="button" (click)="onTakePhoto()">
+            <ion-icon name="camera"></ion-icon>
+            Open Camera
+          </button>
+        </ion-col>
+      </ion-row>
+      <!--<ion-row>
+        <ion-col *ngIf="imageUrl != ''">
+          <img [src]="imageUrl" alt="">
+        </ion-col>
+      </ion-row>-->
+
+      <ion-card *ngIf="imageUrl != ''">
+        <ion-card-content>
+          <ion-col>
+            <img [src]="imageUrl" alt="">
+          </ion-col>
+        </ion-card-content>
+      </ion-card>
+    </ion-grid>
+    
+    <hr>
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <button ion-button color="secondary" block type="submit" [disabled]="!f.valid || !locationIsSet ">Add this Place</button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </form>
+</ion-content>
